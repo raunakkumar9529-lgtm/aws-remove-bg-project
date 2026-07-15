@@ -2,6 +2,7 @@ Remove Background Web Application (AWS Powered)
 
 Yeh ek Flask-based web application hai jo images ka background remove karne ke liye AWS S3 (Storage) aur AWS Lambda (Processing) ka use karti hai.
 
+
 🚀 Deployment Instructions (End-to-End)
 
 Is project ko live karne ke liye niche diye gaye steps ko sequence mein follow karein:-
@@ -9,8 +10,11 @@ Is project ko live karne ke liye niche diye gaye steps ko sequence mein follow k
 1. AWS S3 Setup (Storage)
 
 1. S3 Bucket Banayein:- AWS Console mein jaakar S3 service kholein aur 'Create bucket' par click karein.
+
 2. Naming:- Bucket ko ek unique naam dein (e.g., my-bg-remover-bucket-2026).
+
 3. Permissions:- Bucket settings mein jaakar "Block all public access" ko uncheck karein (taaki images upload ho sakein).
+
 4. Bucket Policy:- Bucket ke 'Permissions' tab mein jaakar bucket policy set karein taaki Lambda isse access kar sake.
 
 
@@ -28,6 +32,7 @@ Is project ko live karne ke liye niche diye gaye steps ko sequence mein follow k
 
 
 3. Local Development Setup
+
 Aapke system mein Python aur Git installed hona chahiye.
 
 # 1. Clone the repository
@@ -63,12 +68,14 @@ python app.py
 
 3. Access:- Browser mein [http://127.0.0.1:5000] kholein.
 
+
 🛠 Tech Stack
 
 Backend:- Python, Flask
 Cloud Storage:- AWS S3
 Serverless:- AWS Lambda
 Version Control:- Git & GitHub
+
 
 ⚠️ Important Note
 
