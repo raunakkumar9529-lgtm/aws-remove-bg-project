@@ -16,6 +16,7 @@ Aapke system mein ye install hona chahiye:
 #### 2. Project Clone Karein
 Apne terminal ya Command Prompt mein ye command run karein:-
 ```bash
+
 git clone [https://github.com/raunakkumar9529-lgtm/aws-remove-bg-project.git](https://github.com/raunakkumar9529-lgtm/aws-remove-bg-project.git)
 cd aws-remove-bg-project
 
@@ -31,9 +32,11 @@ Linux/Mac:-
 python3 -m venv venv
 source venv/bin/activate
 
+
 4. Dependencies Install Karein
 Saari zaroori libraries install karne ke liye ye command chalayein:-
 pip install -r requirements.txt
+
 
 5. Project Run Karein
 Ab application start karne ke liye:-
