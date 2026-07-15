@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Remove BG</title>
+</head>
+<body style="font-family:Arial;text-align:center;margin-top:40px;">
+<h1>Remove Background</h1>
+
+<input type="file" id="image">
+
+<br><br>
+
+<button onclick="upload()">Remove Background</button>
+
+<br><br>
+
+<img id="result" width="400">
+
+<script>
+async function upload(){
+const file=document.getElementById("image").files[0];
+
+const form=new FormData();
+form.append("image",file);
+
+const res=await fetch("/remove-bg",{
+method:"POST",
+body:form
+});
+
+const blob=await res.blob();
+
+document.getElementById("result").src=URL.createObjectURL(blob);
+}
+</script>
+
+</body>
+</html>

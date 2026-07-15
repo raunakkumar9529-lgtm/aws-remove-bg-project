@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remove BG AI</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:Arial,sans-serif;
+
+    background:linear-gradient(-45deg,#0f172a,#1e1b4b,#312e81,#0f172a);
+    background-size:400% 400%;
+    animation:bgAnimation 15s ease infinite;
+
+    overflow-y:auto;
+}
+
+@keyframes bgAnimation{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
+
+.container{
+    width:100%;
+    max-width:520px;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35),
+        0 0 40px rgba(59,130,246,.20);
+
+    transition:.4s;
+}
+
+.container:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 30px 70px rgba(0,0,0,.45),
+0 0 60px rgba(99,102,241,.45);
+}
+
+h1{
+    font-size:42px;
+    font-weight:800;
+    margin-bottom:25px;
+
+    background:linear-gradient(90deg,#60a5fa,#a855f7,#ec4899);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    letter-spacing:1px;
+
+    text-shadow:0 0 20px rgba(255,255,255,.2);
+}
+
+input[type=file]{
+width:100%;
+margin:20px 0;
+}
+
+button{
+    width:100%;
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(90deg,#3b82f6,#8b5cf6);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 10px 30px rgba(59,130,246,.4);
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+
+box-shadow:0 18px 40px rgba(99,102,241,.5);
+
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+img{
+margin-top:25px;
+max-width:100%;
+border-radius:10px;
+display:none;
+}
+
+.loading{
+margin-top:15px;
+display:none;
+font-weight:bold;
+color:#2563eb;
+}
+
+@media(max-width:600px){
+
+.container{
+padding:20px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Background Remover</h1>
+
+<input type="file" id="image">
+
+<button onclick="upload()">Remove Background</button>
+
+<div class="loading" id="loading">
+Processing Image...
+</div>
+
+<img id="preview" style="display:none;max-width:100%;margin-top:20px;border-radius:10px;">
+
+<img id="result">
+
+<br><br>
+
+<a id="download"
+   download="remove-bg.png"
+   style="display:none;
+          background:#16a34a;
+          color:white;
+          padding:12px 20px;
+          border-radius:8px;
+          text-decoration:none;">
+Download PNG
+</a>
+
+</div>
+
+<script>
+
+async function upload(){
+
+const file=document.getElementById("image").files[0];
+
+const preview=document.getElementById("preview");
+
+preview.src=URL.createObjectURL(file);
+
+preview.style.display="block";
+
+if(!file){
+
+alert("Please select an image.");
+
+return;
+
+}
+
+document.getElementById("loading").style.display="block";
+
+const form=new FormData();
+
+form.append("image",file);
+
+const res=await fetch("/remove-bg",{
+
+method:"POST",
+
+body:form
+
+});
+
+const blob=await res.blob();
+
+const url=URL.createObjectURL(blob);
+
+document.getElementById("result").src=url;
+
+document.getElementById("download").href=url;
+
+document.getElementById("download").style.display="inline-block";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("loading").style.display="none";
+
+}
+
+</script>
+
+</body>
+
+</html>

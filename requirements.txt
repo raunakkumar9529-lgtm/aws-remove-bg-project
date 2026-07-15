@@ -1,0 +1,7 @@
+rembg==2.0.50
+pymatting
+pillow
+numpy==1.26.4
+opencv-python-headless
+onnxruntime
+boto3

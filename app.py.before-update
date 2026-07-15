@@ -1,0 +1,57 @@
+from flask import Flask, request, send_file, render_template, jsonify
+from rembg import remove
+from PIL import Image
+import io
+
+app = Flask(__name__)
+
+# -----------------------------
+# HOME PAGE (Frontend UI)
+# -----------------------------
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("index.html")
+
+
+# -----------------------------
+# BACKGROUND REMOVAL API
+# -----------------------------
+@app.route("/remove-bg", methods=["POST"])
+def remove_bg():
+    try:
+        # check if file exists
+        if "image" not in request.files:
+            return jsonify({"error": "No image uploaded"}), 400
+
+        file = request.files["image"]
+
+        if file.filename == "":
+            return jsonify({"error": "Empty file"}), 400
+
+        # open image
+        input_image = Image.open(file.stream).convert("RGBA")
+
+        # remove background
+        output_image = remove(input_image)
+
+        # save to memory
+        img_io = io.BytesIO()
+        output_image.save(img_io, format="PNG")
+        img_io.seek(0)
+
+        return send_file(
+            img_io,
+            mimetype="image/png",
+            as_attachment=True,
+            download_name="no-bg.png"
+        )
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# -----------------------------
+# RUN APP (only for local debug, ignored in service)
+# -----------------------------
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
