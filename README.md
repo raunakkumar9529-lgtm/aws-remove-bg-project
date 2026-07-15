@@ -7,7 +7,7 @@ Yeh ek Flask-based web application hai jo images ka background remove karne ke l
 
 Is project ko live karne ke liye niche diye gaye steps ko sequence mein follow karein:-
 
-1. AWS S3 Setup (Storage)
+### 1. AWS S3 Setup (Storage)
 
 1. S3 Bucket Banayein:- AWS Console mein jaakar S3 service kholein aur 'Create bucket' par click karein.
 
@@ -18,7 +18,7 @@ Is project ko live karne ke liye niche diye gaye steps ko sequence mein follow k
 4. Bucket Policy:- Bucket ke 'Permissions' tab mein jaakar bucket policy set karein taaki Lambda isse access kar sake.
 
 
-2. AWS Lambda Setup (Processing)
+### 2. AWS Lambda Setup (Processing)
 
 1. Function Create Karein: Lambda service mein jayein aur 'Create function' par click karein.
 
@@ -31,7 +31,7 @@ Is project ko live karne ke liye niche diye gaye steps ko sequence mein follow k
 5. Timeout:- 'General configuration' mein jaakar timeout ko 30 seconds ya usse zyada set karein (taaki badi image process ho sake).
 
 
-3. Local Development Setup
+### 3. Local Development Setup
 
 Aapke system mein Python aur Git installed hona chahiye.
 
@@ -63,7 +63,9 @@ S3_BUCKET_NAME=your_bucket_name
 
 2. Run Application:-
 
+```
 python app.py
+```
 
 
 3. Access:- Browser mein [http://127.0.0.1:5000] kholein.
@@ -71,13 +73,13 @@ python app.py
 
 🛠 Tech Stack
 
-Backend:- Python, Flask
-Cloud Storage:- AWS S3
-Serverless:- AWS Lambda
-Version Control:- Git & GitHub
+* **Backend:-** Python, Flask
+* **Cloud Storage:-** AWS S3
+* **Serverless:-** AWS Lambda
+* **Version Control:-** Git & GitHub
 
 
-⚠️ Important Note
+### ⚠️ Important Note
 
 Apne AWS IAM user ko S3FullAccess aur LambdaFullAccess ki policies zaroor attach karein.
 .env file ko kabhi bhi public repository par push na karein (.gitignore zaroor set karein).
